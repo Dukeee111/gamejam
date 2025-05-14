@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlxk2mi8ukg0h"]
+
+[ext_resource type="PackedScene" uid="uid://doogcbbqk1pi3" path="res://Asserts/Scenes/AreaFuntionality/area_template.tscn" id="1_xjbwj"]
+
+[sub_resource type="Curve2D" id="Curve2D_1rom0"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -71)
+}
+point_count = 2
+
+[node name="AreaTemplate" instance=ExtResource("1_xjbwj")]
+
+[node name="MovingPlatformLarge4" parent="MovingPlatforms" index="0"]
+curve = SubResource("Curve2D_1rom0")
+
+[node name="Area Spike" parent="." index="4"]
+position = Vector2(-60, -3)

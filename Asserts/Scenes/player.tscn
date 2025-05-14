@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsgbw2ix2mb4o"]
+[gd_scene load_steps=12 format=3 uid="uid://bsgbw2ix2mb4o"]
 
 [ext_resource type="Script" uid="uid://byy33r73vofkn" path="res://Scripts/player_controller.gd" id="1_ew7lo"]
 [ext_resource type="Script" uid="uid://bphqqhyw8qv6w" path="res://Scripts/player_animator.gd" id="2_lu3iu"]
@@ -17,6 +17,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Rect2(0, 0, 32, 32), Rect2(32, 0, 32, 32), Rect2(64, 0, 32, 32), Rect2(96, 0, 32, 32), Rect2(128, 0, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_slkqr"]
+resource_name = "dash"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32), Rect2(448, 0, 32, 32)]
 }
 
 [sub_resource type="Animation" id="Animation_xkmpm"]
@@ -90,6 +107,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_slkqr"]
 _data = {
 &"RESET": SubResource("Animation_ew7lo"),
+&"dash": SubResource("Animation_slkqr"),
 &"fall": SubResource("Animation_xkmpm"),
 &"idle": SubResource("Animation_lu3iu"),
 &"jump": SubResource("Animation_r0a8h"),
@@ -120,7 +138,7 @@ sprite = NodePath("Sprite2D")
 libraries = {
 &"": SubResource("AnimationLibrary_slkqr")
 }
-autoplay = "move"
+autoplay = "dash"
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerAnimator"]
 position = Vector2(0, -10)
@@ -133,3 +151,11 @@ region_rect = Rect2(0, 0, 32, 32)
 position = Vector2(1, -8)
 scale = Vector2(0.945994, 0.900934)
 shape = SubResource("RectangleShape2D_lu3iu")
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="dash_cooldown_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown_timer" to="." method="_on_dash_cooldown_timer_timeout"]

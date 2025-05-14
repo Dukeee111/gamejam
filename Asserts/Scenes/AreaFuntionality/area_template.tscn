@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://doogcbbqk1pi3"]
+[gd_scene load_steps=10 format=3 uid="uid://doogcbbqk1pi3"]
 
 [ext_resource type="Texture2D" uid="uid://ntb0befljsre" path="res://Sprites/Sprites/tiles_1.png" id="1_sh48n"]
 [ext_resource type="PackedScene" uid="uid://bsgbw2ix2mb4o" path="res://Asserts/Scenes/player.tscn" id="2_afrcq"]
-[ext_resource type="PackedScene" uid="uid://dv8qryi7ada18" path="res://Asserts/Scenes/moving_platform_large.tscn" id="3_miqmm"]
+[ext_resource type="PackedScene" uid="uid://dv8qryi7ada18" path="res://Asserts/Scenes/AreaFuntionality/moving_platform_large.tscn" id="3_miqmm"]
 [ext_resource type="PackedScene" uid="uid://bhhfypeeg0tk2" path="res://Asserts/Scenes/AreaFuntionality/area_exit.tscn" id="4_afrcq"]
+[ext_resource type="PackedScene" uid="uid://clbcf1oieqqht" path="res://Asserts/Scenes/AreaFuntionality/area_spike.tscn" id="5_miqmm"]
+[ext_resource type="PackedScene" uid="uid://c25a2dd5vyiyw" path="res://Asserts/Scenes/AreaFuntionality/area_spring.tscn" id="6_np8fv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vqp3b"]
 texture = ExtResource("1_sh48n")
@@ -339,13 +341,21 @@ layer_1/name = "ground"
 layer_1/tile_data = PackedInt32Array(393221, 131072, 6, 327685, 131072, 5, 262149, 131072, 5, 196613, 131072, 5, 131077, 131072, 5, 65541, 131072, 5, 5, 131072, 4, 393220, 65536, 6, 327684, 65536, 5, 262148, 65536, 5, 196612, 65536, 5, 131076, 65536, 5, 65540, 65536, 5, 4, 65536, 4, 393219, 65536, 6, 327683, 65536, 5, 262147, 65536, 5, 196611, 65536, 5, 131075, 65536, 5, 65539, 65536, 5, 3, 65536, 4, 393218, 65536, 6, 327682, 65536, 5, 262146, 65536, 5, 196610, 65536, 5, 131074, 65536, 5, 65538, 65536, 5, 2, 65536, 4, 393217, 65536, 6, 327681, 65536, 5, 262145, 65536, 5, 196609, 65536, 5, 131073, 65536, 5, 65537, 65536, 5, 1, 65536, 4, 393216, 65536, 6, 327680, 65536, 5, 262144, 65536, 5, 196608, 65536, 5, 131072, 65536, 5, 65536, 65536, 5, 0, 65536, 4, 458751, 65536, 6, 393215, 65536, 5, 327679, 65536, 5, 262143, 65536, 5, 196607, 65536, 5, 131071, 65536, 5, 65535, 65536, 4, 458750, 65536, 6, 393214, 65536, 5, 327678, 65536, 5, 262142, 65536, 5, 196606, 65536, 5, 131070, 65536, 5, 65534, 65536, 4, 458749, 65536, 6, 393213, 65536, 5, 327677, 65536, 5, 262141, 65536, 5, 196605, 65536, 5, 131069, 65536, 5, 65533, 65536, 4, 458748, 65536, 6, 393212, 65536, 5, 327676, 65536, 5, 262140, 65536, 5, 196604, 65536, 5, 131068, 65536, 5, 65532, 65536, 4, 458747, 65536, 6, 393211, 65536, 5, 327675, 65536, 5, 262139, 65536, 5, 196603, 65536, 5, 131067, 65536, 5, 65531, 65536, 4, 458746, 65536, 6, 393210, 65536, 5, 327674, 65536, 5, 262138, 65536, 5, 196602, 65536, 5, 131066, 65536, 5, 65530, 65536, 4, 458745, 0, 6, 393209, 0, 5, 327673, 0, 5, 262137, 0, 5, 196601, 0, 5, 131065, 0, 5, 65529, 0, 4)
 
 [node name="Player" parent="." instance=ExtResource("2_afrcq")]
-position = Vector2(-27, -4)
+position = Vector2(-21, -4)
 
 [node name="MovingPlatforms" type="Node2D" parent="."]
 
 [node name="MovingPlatformLarge4" parent="MovingPlatforms" instance=ExtResource("3_miqmm")]
-position = Vector2(-73, -19)
+position = Vector2(16, -23)
 curve = SubResource("Curve2D_1rom0")
 
 [node name="Area Exit" parent="." instance=ExtResource("4_afrcq")]
-position = Vector2(60, -15)
+position = Vector2(78, -17)
+
+[node name="Area Spike" parent="." instance=ExtResource("5_miqmm")]
+position = Vector2(12, -4)
+scale = Vector2(2, 2)
+
+[node name="Spring" parent="." instance=ExtResource("6_np8fv")]
+position = Vector2(-84, 0)
+collision_layer = 512

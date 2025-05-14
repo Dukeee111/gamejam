@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://c25a2dd5vyiyw"]
+
+[ext_resource type="Script" uid="uid://jx45wxo5hbhx" path="res://Scripts/spring.gd" id="1_rubyq"]
+[ext_resource type="Texture2D" uid="uid://p8pkheh52r0x" path="res://Sprites/Sprites/spring.png" id="2_rpdok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpdok"]
+atlas = ExtResource("2_rpdok")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rubyq"]
+atlas = ExtResource("2_rpdok")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj60b"]
+atlas = ExtResource("2_rpdok")
+region = Rect2(64, 6, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2r3j"]
+atlas = ExtResource("2_rpdok")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fty44"]
+atlas = ExtResource("2_rpdok")
+region = Rect2(32, 2, 32, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_am8ti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpdok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rubyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj60b")
+}],
+"loop": false,
+"name": &"extend",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2r3j")
+}],
+"loop": true,
+"name": &"finished",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.3,
+"texture": SubResource("AtlasTexture_fty44")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 120.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rubyq"]
+size = Vector2(17.5, 2.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v81ew"]
+radius = 1.0
+height = 24.0
+
+[node name="Spring" type="StaticBody2D"]
+position = Vector2(1, 6)
+script = ExtResource("1_rubyq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 2)
+sprite_frames = SubResource("SpriteFrames_am8ti")
+animation = &"extend"
+offset = Vector2(0, -9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.75, -7.25)
+shape = SubResource("RectangleShape2D_rubyq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, -9)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v81ew")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
